@@ -24,6 +24,7 @@
         />
 
     <Button
+        android:id="@+id/findId"
         android:layout_width="243dp"
         android:layout_height="48dp"
         android:layout_marginTop="15dp"
@@ -37,6 +38,7 @@
     android:layout_height="wrap_content">
 
     <Button
+        android:id="@+id/findpw"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginTop="5dp"
