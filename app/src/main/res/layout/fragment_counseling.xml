@@ -22,9 +22,9 @@
                     android:textSize="30sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview"
+                    android:id="@+id/chat_recyclerview"
                     android:layout_width="match_parent"
-                    android:layout_height="540dp"
+                    android:layout_height="500dp"
                     android:layout_weight="1"
                     tools:ignore="MissingConstraints">
 
@@ -32,25 +32,39 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="73dp"
-                    android:layout_weight="1"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/btn_home"
+                    android:clickable="true"
+                    android:elevation="10dp"
                     android:orientation="horizontal">
 
                         <EditText
-                            android:id="@+id/edt"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/chat_input"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="4"
-                            android:hint="증상을 입력하세요"
-                            android:textSize="24sp" />
-
-                        <Button
-                            android:id="@+id/send_btn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
+                            android:layout_marginStart="20sp"
                             android:layout_weight="1"
-                            android:text="Button" />
+                            android:gravity="center_vertical"
+                            android:hint="메시지를 입력하세요"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/chat_send_btn"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"
+                            android:clickable="true"
+                            android:src="@drawable/send"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
