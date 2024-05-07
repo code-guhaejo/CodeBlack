@@ -102,6 +102,31 @@
             />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="171dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginVertical="30dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
+
+        <ImageView
+            android:layout_width="41dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@drawable/google" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="#ffffff"
+            android:text="구글로 연동하기">
+
+        </TextView>
+
+
+    </LinearLayout>
 
 </LinearLayout>
