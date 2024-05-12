@@ -34,8 +34,8 @@ class LoginGoogle(context: Context) {
 
     // 로그인
     fun signIn(activity: Activity) {
-        val signInIntent: Intent = googleSignInClient.signInIntent
-        activity.startActivityForResult(signInIntent, 1000)
+        val signInIntent: Intent = googleSignInClient.signInIntent // 구글 로그인 화면을 시작하기 위한 인텐트를 가져온다
+        activity.startActivityForResult(signInIntent, 1000) // 인텐트 실행, Request Code로 1000 전달
     }
 
     // 로그아웃
