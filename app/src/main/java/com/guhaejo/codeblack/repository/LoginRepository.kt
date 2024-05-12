@@ -12,8 +12,8 @@ import retrofit2.Response
 
 class LoginRepository {
 
-    private val getAccessTokenBaseUrl = "https://www.googleapis.com"
-    private val sendAccessTokenBaseUrl = "http://localhost:8080/login"
+    private val getAccessTokenBaseUrl = "https://www.googleapis.com/"
+    private val sendAccessTokenBaseUrl = "http://localhost:8080/"
 
     // 구글 OAuth 서버로부터 액세스 토큰 요청
     fun getAccessToken(authCode:String) {
