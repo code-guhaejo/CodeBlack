@@ -38,7 +38,7 @@ class LoginGoogleActivity : AppCompatActivity() {
                 handleSignInResult(task)
             } else { // 로그인 취소, 실패
                 Toast.makeText(this, "로그인 취소 또는 실패", Toast.LENGTH_SHORT).show()
-                Log.w("GoogleLoginActivity", "로그인 취소 또는 실패: resultCode $resultCode")
+                Log.w(TAG, "로그인 취소 또는 실패: resultCode ${result.resultCode}")
             }
         }
         Log.d(TAG, "ActivityResultLauncher initialized.")
@@ -53,6 +53,7 @@ class LoginGoogleActivity : AppCompatActivity() {
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
+            Log.d(TAG, "handleSignInResult start.")
             val account = completedTask.getResult(ApiException::class.java)
 
             // 로그인 성공 시 처리
@@ -72,7 +73,7 @@ class LoginGoogleActivity : AppCompatActivity() {
 
         } catch (e: ApiException) {
             // 로그인 실패 시 처리
-            Log.w("GoogleLoginActivity", "로그인 실패: ${e.statusCode}")
+            Log.w(TAG, "로그인 실패: ${e.statusCode}")
             Toast.makeText(this, "로그인 실패: ${e.statusCode}", Toast.LENGTH_SHORT).show()
         }
     }
