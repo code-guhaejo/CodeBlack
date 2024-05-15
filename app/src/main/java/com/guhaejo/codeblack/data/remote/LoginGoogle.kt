@@ -1,10 +1,10 @@
 package com.guhaejo.codeblack.data.remote
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -34,16 +34,27 @@ class LoginGoogle(context: Context) {
     }
 
     // 로그인
-    fun signIn(activity: Activity) {
-        val signInIntent: Intent = googleSignInClient.signInIntent // 구글 로그인 화면을 시작하기 위한 인텐트를 가져온다
-        activity.startActivityForResult(signInIntent, 1000) // 인텐트 실행, Request Code로 1000 전달
+    fun signIn(launcher: ActivityResultLauncher<Intent>) {
+        try {
+            val signInIntent = googleSignInClient.signInIntent
+            if (signInIntent != null) {
+                Log.d(TAG, "Launching Google sign-in intent")
+                launcher.launch(signInIntent)
+                Log.d(TAG, "Google sign-in intent launched")
+            } else {
+                Log.d(TAG, "Failed to create sign-in intent")
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "SignIn intent creation failed with exception: ${e.message}")
+        }
     }
 
     // 로그아웃
     fun signOut(context: Context) {
         googleSignInClient.signOut().addOnCompleteListener {
-                Toast.makeText(context, "로그아웃 되었습니다!", Toast.LENGTH_SHORT).show()
-            }
+            Toast.makeText(context, "로그아웃 되었습니다!", Toast.LENGTH_SHORT).show()
+            Log.d(TAG, "User signed out")
+        }
     }
 
     // 로그인 상태 확인
