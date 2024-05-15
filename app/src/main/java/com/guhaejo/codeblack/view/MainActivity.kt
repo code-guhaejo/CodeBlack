@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        var loginBtn: Button = findViewById(R.id.login_btn)
+        val loginBtn: Button = findViewById(R.id.login_btn)
         loginBtn.setOnClickListener {
             val intent = Intent(this, BottomNavActivity::class.java)
             startActivity(intent)
