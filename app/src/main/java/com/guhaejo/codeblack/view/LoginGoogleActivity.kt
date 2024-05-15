@@ -76,4 +76,8 @@ class LoginGoogleActivity : AppCompatActivity() {
             Toast.makeText(this, "로그인 실패: ${e.statusCode}", Toast.LENGTH_SHORT).show()
         }
     }
+
+    companion object {
+        const val TAG = "GoogleLoginActivity"
+    }
 }
