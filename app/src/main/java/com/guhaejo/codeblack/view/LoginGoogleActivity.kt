@@ -55,22 +55,24 @@ class LoginGoogleActivity : AppCompatActivity() {
         try {
             Log.d(TAG, "handleSignInResult start.")
             val account = completedTask.getResult(ApiException::class.java)
+            if (account != null) {
+                // 로그인 성공 시 처리
+                Toast.makeText(this, "로그인 성공: ${account.displayName}", Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "로그인 성공: ${account.displayName}")
 
-            // 로그인 성공 시 처리
-            Toast.makeText(this, "로그인 성공: ${account?.displayName}", Toast.LENGTH_SHORT).show()
-            Log.d("GoogleLoginActivity", "로그인 성공: ${account?.displayName}")
+                // 액세스 토큰 요청
+                loginGoogle.handleSignInResult(completedTask)
 
-            // 액세스 토큰 요청
-            loginGoogle.handleSignInResult(completedTask)
-
-            // 결과 전달
-            val resultIntent = Intent(this, BottomNavActivity::class.java).apply {
-                putExtra("result", "success")
-                putExtra("accountName", account?.displayName)
+                // 결과 전달
+                val resultIntent = Intent(this, BottomNavActivity::class.java).apply {
+                    putExtra("result", "success")
+                    putExtra("accountName", account.displayName)
+                }
+                startActivity(resultIntent)
+                finish()
+            } else {
+                Log.w(TAG, "Account is null")
             }
-            startActivity(resultIntent)
-            finish()
-
         } catch (e: ApiException) {
             // 로그인 실패 시 처리
             Log.w(TAG, "로그인 실패: ${e.statusCode}")
