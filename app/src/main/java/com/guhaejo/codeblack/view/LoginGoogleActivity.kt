@@ -9,6 +9,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.common.SignInButton
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.common.api.ApiException
 import com.guhaejo.codeblack.BottomNavActivity
@@ -25,15 +26,7 @@ class LoginGoogleActivity : AppCompatActivity() {
 
         // Google 로그인 객체 초기화
         loginGoogle = LoginGoogle(this)
-
-        // Google 로그인 버튼 설정
-        val signInBtn: Button = findViewById(R.id.sign_in_button)
-        signInBtn.setOnClickListener {
-            loginGoogle.signIn(this)
-            // onActivityResult 실행
-            // requestCode(1000), resultCode(RESULT_OK/RESULT_CANCELED), Intent 전달
-        }
-    }
+        Log.d(TAG, "LoginGoogle initialized.")
 
         // ActivityResultLauncher 초기화
         googleSignInLauncher = registerForActivityResult(
@@ -47,6 +40,14 @@ class LoginGoogleActivity : AppCompatActivity() {
                 Toast.makeText(this, "로그인 취소 또는 실패", Toast.LENGTH_SHORT).show()
                 Log.w("GoogleLoginActivity", "로그인 취소 또는 실패: resultCode $resultCode")
             }
+        }
+        Log.d(TAG, "ActivityResultLauncher initialized.")
+
+        // Google 로그인 버튼 설정
+        val signInBtn: SignInButton = findViewById(R.id.sign_in_button)
+        signInBtn.setOnClickListener {
+            Log.d(TAG, "Sign-in button clicked.")
+            loginGoogle.signIn(googleSignInLauncher)
         }
     }
 
