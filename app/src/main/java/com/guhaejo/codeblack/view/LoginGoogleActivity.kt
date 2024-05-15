@@ -3,8 +3,9 @@ package com.guhaejo.codeblack.view
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -16,6 +17,7 @@ import com.guhaejo.codeblack.data.remote.LoginGoogle
 
 class LoginGoogleActivity : AppCompatActivity() {
     private lateinit var loginGoogle: LoginGoogle
+    private lateinit var googleSignInLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,13 +35,13 @@ class LoginGoogleActivity : AppCompatActivity() {
         }
     }
 
-    // 구글 로그인 결과 처리
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == 1000) {  // SignIn 로그인 요청 코드: 1000
-            if (resultCode == RESULT_OK) {  // 로그인 성공
-                val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+        // ActivityResultLauncher 초기화
+        googleSignInLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            Log.d(TAG, "ActivityResult received.")
+            if (result.resultCode == RESULT_OK) {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
                 handleSignInResult(task)
             } else { // 로그인 취소, 실패
                 Toast.makeText(this, "로그인 취소 또는 실패", Toast.LENGTH_SHORT).show()
