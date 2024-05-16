@@ -37,13 +37,9 @@ class LoginGoogle(context: Context) {
     fun signIn(launcher: ActivityResultLauncher<Intent>) {
         try {
             val signInIntent = googleSignInClient.signInIntent
-            if (signInIntent != null) {
-                Log.d(TAG, "Launching Google sign-in intent")
-                launcher.launch(signInIntent)
-                Log.d(TAG, "Google sign-in intent launched")
-            } else {
-                Log.d(TAG, "Failed to create sign-in intent")
-            }
+            Log.d(TAG, "Launching Google sign-in intent")
+            launcher.launch(signInIntent)
+            Log.d(TAG, "Google sign-in intent launched")
         } catch (e: Exception) {
             Log.e(TAG, "SignIn intent creation failed with exception: ${e.message}")
         }
