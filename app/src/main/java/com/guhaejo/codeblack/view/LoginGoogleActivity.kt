@@ -41,7 +41,7 @@ class LoginGoogleActivity : AppCompatActivity() {
 
     private fun initGoogleSignIn() {
         // Google 로그인 객체 초기화
-        loginGoogle = LoginGoogle(this)
+        loginGoogle = LoginGoogle(this, this)
         Log.d(TAG, "LoginGoogle initialized.")
 
         // ActivityResultLauncher 초기화
