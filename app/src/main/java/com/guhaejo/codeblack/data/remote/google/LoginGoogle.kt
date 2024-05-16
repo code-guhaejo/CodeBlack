@@ -1,4 +1,4 @@
-package com.guhaejo.codeblack.data.remote
+package com.guhaejo.codeblack.data.remote.google
 
 import android.content.Context
 import android.content.Intent
@@ -12,7 +12,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-import com.guhaejo.codeblack.repository.LoginRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

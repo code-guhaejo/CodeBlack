@@ -1,9 +1,9 @@
-package com.guhaejo.codeblack.data.remote.api
+package com.guhaejo.codeblack.data.remote.google.api
 
 import com.google.gson.GsonBuilder
-import com.guhaejo.codeblack.data.remote.model.LoginGoogleRequestModel
-import com.guhaejo.codeblack.data.remote.model.LoginGoogleResponseModel
-import com.guhaejo.codeblack.data.remote.model.SendAccessTokenModel
+import com.guhaejo.codeblack.data.remote.google.model.LoginGoogleRequestModel
+import com.guhaejo.codeblack.data.remote.google.model.LoginGoogleResponseModel
+import com.guhaejo.codeblack.data.remote.google.model.SendAccessTokenModel
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

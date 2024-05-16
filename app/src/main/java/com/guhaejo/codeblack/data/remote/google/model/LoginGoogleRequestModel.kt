@@ -1,4 +1,4 @@
-package com.guhaejo.codeblack.data.remote.model
+package com.guhaejo.codeblack.data.remote.google.model
 
 import com.google.gson.annotations.SerializedName
 

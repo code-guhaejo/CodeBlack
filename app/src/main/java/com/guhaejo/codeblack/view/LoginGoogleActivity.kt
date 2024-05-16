@@ -15,7 +15,7 @@ import com.google.android.gms.tasks.Task
 import com.google.android.gms.common.api.ApiException
 import com.guhaejo.codeblack.BottomNavActivity
 import com.guhaejo.codeblack.R
-import com.guhaejo.codeblack.data.remote.LoginGoogle
+import com.guhaejo.codeblack.data.remote.google.LoginGoogle
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
