@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.SignInButton
@@ -15,6 +16,9 @@ import com.google.android.gms.common.api.ApiException
 import com.guhaejo.codeblack.BottomNavActivity
 import com.guhaejo.codeblack.R
 import com.guhaejo.codeblack.data.remote.LoginGoogle
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class LoginGoogleActivity : AppCompatActivity() {
     private lateinit var loginGoogle: LoginGoogle
@@ -57,31 +61,36 @@ class LoginGoogleActivity : AppCompatActivity() {
     }
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
-        try {
-            Log.d(TAG, "handleSignInResult start.")
-            val account = completedTask.getResult(ApiException::class.java)
-            if (account != null) {
-                // 로그인 성공 시 처리
-                Toast.makeText(this, "로그인 성공: ${account.displayName}", Toast.LENGTH_SHORT).show()
-                Log.d(TAG, "로그인 성공: ${account.displayName}")
-
-                // 액세스 토큰 요청
-                loginGoogle.handleSignInResult(completedTask)
-
-                // 결과 전달
-                val resultIntent = Intent(this, BottomNavActivity::class.java).apply {
-                    putExtra("result", "success")
-                    putExtra("accountName", account.displayName)
+        lifecycleScope.launch(Dispatchers.Main) {
+            try {
+                Log.d(TAG, "handleSignInResult start.")
+                val account = withContext(Dispatchers.IO) {
+                    completedTask.getResult(ApiException::class.java)
                 }
-                startActivity(resultIntent)
-                finish()
-            } else {
-                Log.w(TAG, "Account is null")
+
+                if (account != null) {
+                    // 로그인 성공 시 처리
+                    Toast.makeText(this@LoginGoogleActivity, "로그인 성공: ${account.displayName}", Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "로그인 성공: ${account.displayName}")
+
+                    // 액세스 토큰 요청
+                    loginGoogle.handleSignInResult(completedTask)
+
+                    // 결과 전달
+                    val resultIntent = Intent(this@LoginGoogleActivity, BottomNavActivity::class.java).apply {
+                        putExtra("result", "success")
+                        putExtra("accountName", account.displayName)
+                    }
+                    startActivity(resultIntent)
+                    finish()
+                } else {
+                    Log.w(TAG, "Account is null")
+                }
+            } catch (e: ApiException) {
+                // 로그인 실패 시 처리
+                Log.w(TAG, "로그인 실패: ${e.statusCode}")
+                Toast.makeText(this@LoginGoogleActivity, "로그인 실패: ${e.statusCode}", Toast.LENGTH_SHORT).show()
             }
-        } catch (e: ApiException) {
-            // 로그인 실패 시 처리
-            Log.w(TAG, "로그인 실패: ${e.statusCode}")
-            Toast.makeText(this, "로그인 실패: ${e.statusCode}", Toast.LENGTH_SHORT).show()
         }
     }
 
