@@ -66,6 +66,8 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.51.1")
 
     implementation ("com.google.android.gms:play-services-auth:21.0.0")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
 }
 
 // Allow references to generated code

@@ -15,7 +15,7 @@ class LoginRepository {
     // Google API 서버 URL
     private val getAccessTokenBaseUrl = "https://www.googleapis.com/"
     // 로컬 서버 URL
-    private val sendAccessTokenBaseUrl = "http://localhost:8080/"
+    private val sendAccessTokenBaseUrl = "http://10.0.2.2:8080/"
 
     // 구글 OAuth 서버로부터 액세스 토큰 요청
     fun getAccessToken(authCode:String) {
