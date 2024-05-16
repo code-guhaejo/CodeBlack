@@ -24,6 +24,18 @@ class LoginGoogleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        // 초기화
+        initGoogleSignIn()
+
+        // Google 로그인 버튼 설정
+        val signInBtn: SignInButton = findViewById(R.id.sign_in_button)
+        signInBtn.setOnClickListener {
+            Log.d(TAG, "Sign-in button clicked.")
+            loginGoogle.signIn(googleSignInLauncher)
+        }
+    }
+
+    private fun initGoogleSignIn() {
         // Google 로그인 객체 초기화
         loginGoogle = LoginGoogle(this)
         Log.d(TAG, "LoginGoogle initialized.")
@@ -42,13 +54,6 @@ class LoginGoogleActivity : AppCompatActivity() {
             }
         }
         Log.d(TAG, "ActivityResultLauncher initialized.")
-
-        // Google 로그인 버튼 설정
-        val signInBtn: SignInButton = findViewById(R.id.sign_in_button)
-        signInBtn.setOnClickListener {
-            Log.d(TAG, "Sign-in button clicked.")
-            loginGoogle.signIn(googleSignInLauncher)
-        }
     }
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
