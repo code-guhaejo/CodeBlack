@@ -104,6 +104,7 @@
             />
     </LinearLayout>
 
+
     <LinearLayout
         android:id="@+id/move_google"
         android:layout_width="171dp"
@@ -128,8 +129,14 @@
             android:text="구글로 연동하기">
 
         </TextView>
-
-
+      
     </LinearLayout>
+
+    <!--구글 로그인-->
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"/>
 
 </LinearLayout>
