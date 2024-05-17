@@ -11,12 +11,14 @@
 
 
     <EditText
+        android:id="@+id/input_name"
         android:layout_width="243dp"
         android:layout_height="48dp"
         android:layout_marginTop="10dp"
         android:hint="이름"
         />
     <EditText
+        android:id="@+id/input_tell"
         android:layout_width="243dp"
         android:layout_height="48dp"
         android:layout_marginTop="15dp"
@@ -24,6 +26,7 @@
         />
 
     <Button
+        android:id="@+id/findId"
         android:layout_width="243dp"
         android:layout_height="48dp"
         android:layout_marginTop="15dp"
@@ -37,6 +40,7 @@
     android:layout_height="wrap_content">
 
     <Button
+        android:id="@+id/find_pw"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginTop="5dp"
@@ -50,6 +54,7 @@
         />
 
     <Button
+        android:id="@+id/move_login"
         android:layout_width="88dp"
         android:layout_height="48dp"
         android:layout_marginTop="5dp"

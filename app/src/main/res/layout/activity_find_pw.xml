@@ -12,12 +12,14 @@
 
 
     <EditText
+        android:id="@+id/input_id"
         android:layout_width="243dp"
         android:layout_height="48dp"
         android:layout_marginTop="10dp"
         android:hint="아이디"
         />
     <EditText
+        android:id="@+id/input_email"
         android:layout_width="243dp"
         android:layout_height="48dp"
         android:layout_marginTop="15dp"
@@ -25,6 +27,7 @@
         />
 
     <Button
+        android:id="@+id/findPw"
         android:layout_width="243dp"
         android:layout_height="48dp"
         android:layout_marginTop="15dp"
@@ -36,6 +39,7 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:id="@+id/move_login"
             android:layout_width="88dp"
             android:layout_height="48dp"
             android:layout_marginTop="5dp"

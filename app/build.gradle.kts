@@ -4,6 +4,7 @@ plugins {
 
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -66,7 +67,9 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.51.1")
 
     implementation ("com.google.android.gms:play-services-auth:21.0.0")
-
+    implementation("com.google.android.gms:play-services-location-license:12.0.1")
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
+    
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
 }
 

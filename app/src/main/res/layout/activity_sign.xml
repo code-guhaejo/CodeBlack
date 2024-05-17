@@ -11,30 +11,35 @@
 
 
     <EditText
+        android:id="@+id/input_name"
         android:layout_width="243dp"
         android:layout_height="45dp"
         android:layout_marginTop="10dp"
         android:hint="이름"
         />
     <EditText
+        android:id="@+id/input_email"
         android:layout_width="243dp"
         android:layout_height="48dp"
         android:layout_marginTop="15dp"
         android:hint="아이디(이메일)"
          />
     <EditText
+        android:id="@+id/input_pw"
         android:layout_width="243dp"
         android:layout_height="48dp"
         android:layout_marginTop="15dp"
         android:hint="비밀번호"
         />
     <EditText
+        android:id="@+id/reinput_pw"
         android:layout_width="243dp"
         android:layout_height="48dp"
         android:layout_marginTop="15dp"
         android:hint="비밀번호 재입력"
         />
     <EditText
+        android:id="@+id/input_tell"
         android:layout_width="243dp"
         android:layout_height="48dp"
         android:layout_marginTop="15dp"
@@ -42,6 +47,7 @@
         />
 
     <Button
+        android:id="@+id/sign"
         android:layout_width="243dp"
         android:layout_height="48dp"
         android:layout_marginTop="15dp"

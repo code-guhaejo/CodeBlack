@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
 
         counseling_btn.setOnClickListener {
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
-            val counselingFragment = CounselingFragment.newInstance("","")
+            val counselingFragment = CounselingFragment.newInstance("", "")
 //            transaction.addToBackStack(null)
             transaction.replace(R.id.mainFrameLayout, counselingFragment)
             transaction.commit()
