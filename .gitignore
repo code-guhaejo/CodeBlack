@@ -14,4 +14,4 @@
 .cxx
 local.properties
 
-/app/src/main/java/com/guhaejo/codeblack/data/remote/ClientInformation.kt
+/app/src/main/java/com/guhaejo/codeblack/data/remote/logingoogle/ClientInformation.kt
