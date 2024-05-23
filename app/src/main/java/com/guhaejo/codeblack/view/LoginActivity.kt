@@ -21,7 +21,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class LoginGoogleActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
     private lateinit var loginGoogle: LoginGoogle
     private lateinit var googleSignInLauncher: ActivityResultLauncher<Intent>
 
@@ -77,14 +77,14 @@ class LoginGoogleActivity : AppCompatActivity() {
 
                 if (account != null) {
                     // 로그인 성공 시 처리
-                    Toast.makeText(this@LoginGoogleActivity, "로그인 성공: ${account.displayName}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, "로그인 성공: ${account.displayName}", Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "로그인 성공: ${account.displayName}")
 
                     // 액세스 토큰 요청
                     loginGoogle.handleSignInResult(completedTask)
 
                     // 결과 전달
-                    val resultIntent = Intent(this@LoginGoogleActivity, BottomNavActivity::class.java).apply {
+                    val resultIntent = Intent(this@LoginActivity, BottomNavActivity::class.java).apply {
                         putExtra("result", "success")
                         putExtra("accountName", account.displayName)
                     }
@@ -96,7 +96,7 @@ class LoginGoogleActivity : AppCompatActivity() {
             } catch (e: ApiException) {
                 // 로그인 실패 시 처리
                 Log.w(TAG, "로그인 실패: ${e.statusCode}")
-                Toast.makeText(this@LoginGoogleActivity, "로그인 실패: ${e.statusCode}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LoginActivity, "로그인 실패: ${e.statusCode}", Toast.LENGTH_SHORT).show()
             }
         }
     }
