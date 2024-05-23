@@ -32,7 +32,7 @@
             android:value="YOUR_API_KEY" />
 
         <activity
-            android:name=".view.MainActivity"
+            android:name=".view.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,7 +47,7 @@
         </activity>
 
         <activity
-            android:name=".view.LoginGoogleActivity"
+            android:name=".view.MainActivity"
             android:exported="true">
         </activity>
     </application>
