@@ -19,6 +19,8 @@ import com.guhaejo.codeblack.data.remote.google.LoginGoogle
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import android.widget.Button
+
 
 class LoginGoogleActivity : AppCompatActivity() {
     private lateinit var loginGoogle: LoginGoogle
@@ -32,12 +34,15 @@ class LoginGoogleActivity : AppCompatActivity() {
         initGoogleSignIn()
 
         // Google 로그인 버튼 설정
-        val signInBtn: SignInButton = findViewById(R.id.sign_in_button)
-        signInBtn.setOnClickListener {
-            Log.d(TAG, "Sign-in button clicked.")
+        // 커스텀한 구글 로그인 버튼 설정
+        val customGoogleSignInBtn: Button = findViewById(R.id.custom_google_sign_in_button)
+        customGoogleSignInBtn.setOnClickListener {
+            // 버튼 클릭 시 동작 설정
+            Log.d(TAG, "Custom Google sign-in button clicked.")
             loginGoogle.signIn(googleSignInLauncher)
         }
     }
+
 
     private fun initGoogleSignIn() {
         // Google 로그인 객체 초기화
