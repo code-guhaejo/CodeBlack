@@ -3,6 +3,7 @@ package com.guhaejo.codeblack.view
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -28,10 +29,16 @@ class LoginGoogleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        // 초기화
+        // Local 로그인
+        val loginBtn: Button = findViewById(R.id.login_btn)
+        loginBtn.setOnClickListener {
+            val intent = Intent(this, BottomNavActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Google 로그인
         initGoogleSignIn()
 
-        // Google 로그인 버튼 설정
         val signInBtn: SignInButton = findViewById(R.id.sign_in_button)
         signInBtn.setOnClickListener {
             Log.d(TAG, "Sign-in button clicked.")
