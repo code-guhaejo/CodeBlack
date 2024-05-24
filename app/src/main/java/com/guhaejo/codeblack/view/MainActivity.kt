@@ -20,10 +20,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Google 로그인 버튼 설정
-        val googleLoginBtn: SignInButton = findViewById(R.id.sign_in_button)
-        googleLoginBtn.setOnClickListener {
+        val customGoogleSignInBtn: Button = findViewById(R.id.custom_google_sign_in_button)
+        customGoogleSignInBtn.setOnClickListener {
             val googleLoginIntent = Intent(this, LoginGoogleActivity::class.java)
             startActivity(googleLoginIntent)
         }
+
+
     }
 }
