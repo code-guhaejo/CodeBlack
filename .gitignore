@@ -7,6 +7,7 @@
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
+/.idea/misc.xml
 .DS_Store
 /build
 /captures
@@ -14,4 +15,4 @@
 .cxx
 local.properties
 
-/app/src/main/java/com/guhaejo/codeblack/data/remote/ClientInformation.kt
+/app/src/main/java/com/guhaejo/codeblack/data/remote/logingoogle/ClientInformation.kt

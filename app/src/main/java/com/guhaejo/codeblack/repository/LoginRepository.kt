@@ -1,11 +1,11 @@
 package com.guhaejo.codeblack.repository
 
 import android.util.Log
-import com.guhaejo.codeblack.data.remote.google.ClientInformation
-import com.guhaejo.codeblack.data.remote.google.api.LoginGoogleService
-import com.guhaejo.codeblack.data.remote.google.model.LoginGoogleRequestModel
-import com.guhaejo.codeblack.data.remote.google.model.LoginGoogleResponseModel
-import com.guhaejo.codeblack.data.remote.google.model.SendAccessTokenModel
+import com.guhaejo.codeblack.data.remote.logingoogle.ClientInformation
+import com.guhaejo.codeblack.data.remote.logingoogle.api.LoginGoogleService
+import com.guhaejo.codeblack.data.remote.logingoogle.model.LoginGoogleRequestModel
+import com.guhaejo.codeblack.data.remote.logingoogle.model.LoginGoogleResponseModel
+import com.guhaejo.codeblack.data.remote.logingoogle.model.SendAccessTokenModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

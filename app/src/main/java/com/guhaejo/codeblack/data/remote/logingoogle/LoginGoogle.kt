@@ -1,4 +1,4 @@
-package com.guhaejo.codeblack.data.remote.google
+package com.guhaejo.codeblack.data.remote.logingoogle
 
 import android.content.Context
 import android.content.Intent
