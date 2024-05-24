@@ -19,6 +19,7 @@ class BottomNavActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.homeBottomNav.itemIconTintList = null
         setFragment(TAG_HOME, HomeFragment())
 
         binding.homeBottomNav.setOnItemSelectedListener { item ->
