@@ -9,21 +9,39 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginBottom="80dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="71dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:elevation="16dp"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <EditText
+                android:id="@+id/input_search"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:text="counseling list"
-                android:textSize="30sp" />
+                android:background="#EFEFEF"
+                android:gravity="center_vertical"
+                android:lines="1"
+                android:textSize="14sp"
+                android:padding="10dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/search"
+                android:layout_width="41dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:src="@drawable/search" />
+
         </LinearLayout>
 
         <ListView
@@ -44,7 +62,7 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/btn_home"
             android:clickable="true"
-            android:elevation="10dp"
+            android:elevation="5dp"
             android:orientation="horizontal">
 
             <TextView
@@ -67,11 +85,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"></LinearLayout>
     </LinearLayout>
 
 </FrameLayout>

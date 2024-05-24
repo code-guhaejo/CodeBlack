@@ -3,15 +3,19 @@
     xmlns="http://www.w3.org/1999/XSL/Transform">
     <item
         android:id="@+id/ic_home"
+        android:icon="@drawable/ic_home"
         android:title="home"/>
     <item
         android:id="@+id/ic_counseling"
+        android:icon="@drawable/ic_chat"
         android:title="비대면상담"/>
 
     <item
         android:id="@+id/ic_hospital"
+        android:icon="@drawable/ic_hospital"
         android:title="병원조회"/>
     <item
         android:id="@+id/ic_mypage"
+        android:icon="@drawable/ic_settings"
         android:title="마이페이지"/>
 </menu>

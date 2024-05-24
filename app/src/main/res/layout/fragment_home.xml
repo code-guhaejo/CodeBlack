@@ -156,12 +156,9 @@
 
                     <LinearLayout
                         android:id="@+id/site1"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginBottom="5dp"
+                        android:layout_margin="10dp"
                         android:layout_weight="1"
                         android:background="@drawable/layout_home2"
                         android:clickable="false"
@@ -170,11 +167,12 @@
 
                         <ImageView
                             android:id="@+id/site1_img"
-                            android:layout_width="90dp"
-                            android:layout_height="90dp"
-                            android:layout_gravity="center_horizontal|center_vertical"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
                             android:layout_marginStart="5dp"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="5dp"
                             android:clickable="true"
                             android:contentDescription="site1_Picture"
                             android:focusable="auto"
@@ -184,19 +182,16 @@
                             android:id="@+id/textView6"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_horizontal|center_vertical"
+                            android:gravity="center"
                             android:text="질병관리청"
-                            android:textSize="12sp" />
+                            android:textSize="10sp" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/site2"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginBottom="5dp"
+                        android:layout_margin="10dp"
                         android:layout_weight="1"
                         android:background="@drawable/layout_home2"
                         android:elevation="5dp"
@@ -205,11 +200,12 @@
 
                         <ImageView
                             android:id="@+id/site2_img"
-                            android:layout_width="90dp"
-                            android:layout_height="90dp"
+                            android:layout_width="40dp"
+                            android:layout_height="45dp"
                             android:layout_gravity="center"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="20dp"
                             android:clickable="true"
+                            android:layout_marginBottom="10dp"
                             android:contentDescription="site2_Picture"
                             android:focusable="true"
                             android:src="@drawable/site2" />
@@ -220,17 +216,14 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="국민건강보험공단"
-                            android:textSize="12sp" />
+                            android:textSize="10sp" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/site3"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginBottom="5dp"
+                        android:layout_margin="10dp"
                         android:layout_weight="1"
                         android:background="@drawable/layout_home2"
                         android:clickable="false"
@@ -239,11 +232,12 @@
 
                         <ImageView
                             android:id="@+id/site3_img"
-                            android:layout_width="90dp"
-                            android:layout_height="90dp"
-                            android:layout_gravity="center|center_horizontal"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginTop="10dp"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="10dp"
                             android:clickable="true"
                             android:focusable="true"
                             android:contentDescription="site3_Picture"
@@ -255,7 +249,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="건강보험심사평가원"
-                            android:textSize="12sp" />
+                            android:textSize="10sp" />
                     </LinearLayout>
 
                 </LinearLayout>
