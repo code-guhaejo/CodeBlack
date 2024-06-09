@@ -196,7 +196,7 @@ class CounselingFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(): CounselingFragment {
+        fun newInstance(string1: String,string2: String): CounselingFragment {
             return CounselingFragment()
         }
     }
