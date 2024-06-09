@@ -1,6 +1,6 @@
 package com.guhaejo.codeblack.data.remote.loginlocal
 
-import com.guhaejo.codeblack.data.remote.loginlocal.api.LoginService
+import com.guhaejo.codeblack.data.remote.loginlocal.api.LoginLocalService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -25,7 +25,7 @@ object RetrofitClient {
             .build()
     }
 
-    val loginService: LoginService by lazy {
-        retrofit.create(LoginService::class.java)
+    val loginLocalService: LoginLocalService by lazy {
+        retrofit.create(LoginLocalService::class.java)
     }
 }
