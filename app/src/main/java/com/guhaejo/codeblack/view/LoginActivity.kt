@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -16,9 +17,13 @@ import com.google.android.gms.common.api.ApiException
 import com.guhaejo.codeblack.BottomNavActivity
 import com.guhaejo.codeblack.R
 import com.guhaejo.codeblack.data.remote.logingoogle.LoginGoogle
+import com.guhaejo.codeblack.data.remote.loginlocal.RetrofitClient
+import com.guhaejo.codeblack.data.remote.loginlocal.model.SignInRequest
+import com.guhaejo.codeblack.data.remote.loginlocal.model.SignInResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 
 
 class LoginActivity : AppCompatActivity() {
@@ -30,18 +35,50 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         // Local 로그인
-        val loginBtn: Button = findViewById(R.id.login_btn)
+        val inputId = findViewById<EditText>(R.id.input_id) // 아이디
+        val inputPw = findViewById<EditText>(R.id.input_pw) // 비밀번호
+        val loginBtn = findViewById<Button>(R.id.login_btn) // 로그인
+        val findId = findViewById<Button>(R.id.find_id) // 아이디 찾기
+        val findPw = findViewById<Button>(R.id.find_pw) // 비밀번호 찾기
+        val moveSign = findViewById<Button>(R.id.move_sign) // 회원가입
+
         loginBtn.setOnClickListener {
-            val intent = Intent(this, BottomNavActivity::class.java)
+            val email = inputId.text.toString()
+            val password = inputPw.text.toString()
+
+            val signInRequest = SignInRequest(email, password)
+
+            lifecycleScope.launch {
+                try {
+                    val response = RetrofitClient.loginLocalService.signInUser(signInRequest)
+                    if (response.isSuccessful) {
+                        val signInResponse: SignInResponse? = response.body()
+                        if (signInResponse != null) {
+                            Toast.makeText(this@LoginActivity, "로그인 성공!", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this@LoginActivity, BottomNavActivity::class.java)
+                            startActivity(intent)
+                        } else {
+                            Toast.makeText(this@LoginActivity, "로그인 실패: ${response.message()}", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(this@LoginActivity, "로그인 실패: ${response.message()}", Toast.LENGTH_SHORT).show()
+                    }
+                } catch (e: HttpException) {
+                    Toast.makeText(this@LoginActivity, "로그인 실패: ${e.message()}", Toast.LENGTH_SHORT).show()
+                } catch (e: Exception) {
+                    Toast.makeText(this@LoginActivity, "로그인 실패: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        moveSign.setOnClickListener {
+            val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
 
+
         // Google 로그인
         initGoogleSignIn()
-
-//        val signInBtn: SignInButton = findViewById(R.id.sign_in_button)
-//        signInBtn.setOnClickListener {
-//            Log.d(TAG, "Sign-in button clicked.")
 
         // Google 로그인 버튼 설정
         // 커스텀한 구글 로그인 버튼 설정
