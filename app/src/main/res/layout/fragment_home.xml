@@ -112,25 +112,73 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="313dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/layout_home"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/home_textview"
+                    android:id="@+id/home_textview4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
                     android:layout_marginEnd="15dp"
-                    android:text="준비중" />
+                    android:layout_marginBottom="5dp"
+                    android:text="사용방법"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/home_textview1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="* 해당 상담을 통해 가까운 응급실 정보를 얻을 수 있어요.\n\n
+* GPS 기반으로 사용자 근처의 응급실 정보를 제공합니다."
+                    android:textColor="#000000"
+                    android:textStyle="bold" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/layout_home3"
+                android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/home_textview3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="주의사항"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/home_textview2"
+                    android:layout_width="347dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="* 비대면 상담 용도 외 사용은 불가능합니다.\n\n * 증상이 심한 경우 병원을 꼭 방문해주세요 "
+                    android:textColor="#000000"
+                    android:textStyle="bold" />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="162dp"
