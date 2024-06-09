@@ -39,7 +39,7 @@
         android:hint="비밀번호 재입력"
         />
     <EditText
-        android:id="@+id/input_tell"
+        android:id="@+id/input_phone"
         android:layout_width="243dp"
         android:layout_height="48dp"
         android:layout_marginTop="15dp"
