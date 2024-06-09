@@ -73,10 +73,11 @@ dependencies {
     implementation ("com.squareup.okhttp3:okhttp-urlconnection:4.9.1")
 
     implementation ("com.google.code.gson:gson:2.10")
-    implementation ("com.google.android.gms:play-services-auth:21.1.1")
-    implementation("com.google.android.gms:play-services-location-license:12.0.1")
-    implementation("com.google.android.gms:play-services-maps:18.2.0")
-
+    implementation ("com.google.android.gms:play-services-auth:21.2.0")
+    implementation ("com.google.android.gms:play-services-location-license:12.0.1")
+    implementation ("com.google.android.gms:play-services-maps:18.2.0")
+    implementation ("com.google.android.gms:play-services-location:21.3.0")
+    implementation ("com.google.android.libraries.places:places:3.5.0")
 }
 
 // Allow references to generated code
