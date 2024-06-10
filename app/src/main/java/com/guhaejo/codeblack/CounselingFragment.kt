@@ -26,12 +26,14 @@ import java.util.concurrent.TimeUnit
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.widget.TextView
+
 class CounselingFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var etMsg: EditText
     private lateinit var btnSend: AppCompatImageView
-    private lateinit var textnext: EditText
+    private lateinit var textnext: TextView
 
     private val messageList = ArrayList<Message>()
     private lateinit var messageAdapter: MessageAdapter
