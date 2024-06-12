@@ -22,9 +22,6 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
 import java.util.concurrent.TimeUnit
-import android.content.Context
-import android.content.DialogInterface
-import android.content.Intent
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
