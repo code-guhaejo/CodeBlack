@@ -40,6 +40,7 @@ class HospitalFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val view = inflater.inflate(R.layout.fragment_hospital, container, false)
 
         val hospitalArrowLeft = view.findViewById<ImageView>(R.id.arrow_left)
