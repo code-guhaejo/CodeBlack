@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.guhaejo.codeblack.R
 import com.guhaejo.codeblack.widget.utils.Message
-
 class MessageAdapter(private val messageList: List<Message>) :
     RecyclerView.Adapter<MessageAdapter.ViewHolder>() {
 
@@ -19,7 +18,7 @@ class MessageAdapter(private val messageList: List<Message>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val message = messageList[position]
-        if (message.sentBy == Message.SENT_BY_ME) {
+        if (message.sender == Message.Sender.USER) {
             holder.leftChatView.visibility = View.GONE
             holder.rightChatView.visibility = View.VISIBLE
             holder.rightChatTv.text = message.message

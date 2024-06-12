@@ -1,11 +1,12 @@
 package com.guhaejo.codeblack.widget.utils
 
+import java.time.LocalDateTime
+
 data class Message(
-    var message: String = "",
-    var sentBy: String = ""
+    val sender: Sender,
+    val message: String
 ) {
-    companion object {
-        const val SENT_BY_ME = "me"
-        const val SENT_BY_BOT = "bot"
+    enum class Sender {
+        USER, AI
     }
 }

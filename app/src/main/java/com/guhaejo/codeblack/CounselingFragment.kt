@@ -27,6 +27,14 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.widget.TextView
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import com.guhaejo.codeblack.data.remote.loginlocal.RetrofitClient
+import com.guhaejo.codeblack.data.remote.loginlocal.model.ChatRequest
+import com.guhaejo.codeblack.data.remote.loginlocal.model.MessageRequest
+import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import java.util.ArrayList
 
 class CounselingFragment : Fragment() {
 
@@ -38,6 +46,8 @@ class CounselingFragment : Fragment() {
     private val messageList = ArrayList<Message>()
     private lateinit var messageAdapter: MessageAdapter
 
+    private var chatId: Int = -1
+    
     private val JSON: MediaType = "application/json; charset=utf-8".toMediaType()
 
 
@@ -47,12 +57,40 @@ class CounselingFragment : Fragment() {
         .readTimeout(60, TimeUnit.SECONDS)
         .build()
 
+    private fun startNewChat() {
+        //DB API 호출
+        lifecycleScope.launch {
+            try {
+                val response = RetrofitClient.chatService.addChat(ChatRequest(userId = 1))
+                if (response.isSuccessful) {
+                    chatId = response.body() ?: -1
+                    if (chatId == -1) {
+                        showError("채팅 ID를 생성할 수 없습니다.")
+                    }
+                } else {
+                    showError("채팅 시작 오류: ${response.message()}")
+                }
+            } catch (e: HttpException) {
+                showError("서버 통신 실패: ${e.message()}")
+            } catch (e: Exception) {
+                showError("오류 발생: ${e.message}")
+            }
+        }
+    }
+
+    private fun showError(s: String) {
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
+
+
     ): View? {
         return inflater.inflate(R.layout.fragment_counseling, container, false)
+
     }
 
     @SuppressLint("WrongViewCast")
@@ -77,31 +115,60 @@ class CounselingFragment : Fragment() {
         // 전송 버튼에 클릭 리스너 추가
         btnSend.setOnClickListener {
             val question = etMsg.text.toString().trim()
-            addToChat(question, Message.SENT_BY_ME)
+            addToChat( Message.Sender.USER,question)
             etMsg.setText("")
             callAPI(question)
         }
+        startNewChat()
     }
 
     // 대화 목록에 메시지 추가
-    private fun addToChat(message: String, sentBy: String) {
+    private fun addToChat(sentBy: Message.Sender,message: String) {
         activity?.runOnUiThread {
-            messageList.add(Message(message, sentBy))
+            messageList.add(Message( sentBy,message))
             messageAdapter.notifyDataSetChanged()
             recyclerView.smoothScrollToPosition(messageAdapter.itemCount)
+
+
         }
     }
+    private fun saveMessageToDatabase(chatId: Int, userId: Long, sender: Message.Sender, message: String) {
+        // 대화 메시지 요청 생성
+        val messageRequest = MessageRequest(chatId, userId, sender, message)
+
+        // Coroutine을 사용하여 비동기 호출
+        lifecycleScope.launch {
+            try {
+                // Retrofit을 사용하여 서버에 대화 메시지 저장 요청을 전송
+                val response = RetrofitClient.chatService.addMessage(messageRequest)
+                if (response.isSuccessful) {
+                    // 저장이 성공한 경우
+                    Log.d("CounselingFragment", "Message saved successfully")
+                } else {
+                    // 저장이 실패한 경우
+                    showError("메시지 저장 실패: ${response.message()}")
+                }
+            } catch (e: HttpException) {
+                // HTTP 예외 처리
+                showError("서버 통신 실패: ${e.message()}")
+            } catch (e: Exception) {
+                // 기타 예외 처리
+                showError("오류 발생: ${e.message}")
+            }
+        }
+    }
+
 
     // 응답 추가
     private fun addResponse(response: String) {
         messageList.removeAt(messageList.size - 1)
-        addToChat(response, Message.SENT_BY_BOT)
+        addToChat( Message.Sender.AI,response)
     }
 
     // OpenAI API 호출
     private fun callAPI(question: String) {
         // 대기 메시지 추가
-        messageList.add(Message("...", Message.SENT_BY_BOT))
+        messageList.add(Message(Message.Sender.AI,"..."))
 
         // JSON 배열 생성
         val arr = JSONArray()
@@ -197,10 +264,16 @@ class CounselingFragment : Fragment() {
         })
     }
 
+    private fun showError(message: Message) {
+        Toast.makeText(context, message.message, Toast.LENGTH_SHORT).show()
+        Log.e("CounselingFragment", message.message)
+    }
     companion object {
         fun newInstance(string1: String,string2: String): CounselingFragment {
             return CounselingFragment()
         }
+        // 오류 메시지 출력
+
     }
 
 }
