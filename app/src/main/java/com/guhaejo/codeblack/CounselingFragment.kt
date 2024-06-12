@@ -1,7 +1,6 @@
 package com.guhaejo.codeblack
 
 import android.util.Log
-import android.app.AlertDialog
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +11,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.guhaejo.codeblack.data.remote.logingoogle.ClientInformation.OPEN_AI_SECRET
+import com.guhaejo.codeblack.data.remote.ClientInformation.OPEN_AI_SECRET
 import com.guhaejo.codeblack.view.adapter.MessageAdapter
 import com.guhaejo.codeblack.widget.utils.Message
 import okhttp3.*
