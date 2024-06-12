@@ -30,6 +30,7 @@ import com.guhaejo.codeblack.data.remote.loginlocal.model.ChatRequest
 import com.guhaejo.codeblack.data.remote.loginlocal.model.MessageRequest
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import java.util.Locale.Category
 
 class CounselingFragment : Fragment() {
 
@@ -88,6 +89,7 @@ class CounselingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         recyclerView = view.findViewById(R.id.chat_recyclerview)
         etMsg = view.findViewById(R.id.chat_input)
         btnSend = view.findViewById(R.id.chat_send_btn)
@@ -97,8 +99,8 @@ class CounselingFragment : Fragment() {
 
         btnchat.setOnClickListener {
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
-            val hospitalFragment = HospitalFragment.newInstance("", "")
-            transaction.replace(R.id.mainFrameLayout, hospitalFragment)
+            val emerlistFragment = EmerlistFragment.newInstance("확인","1")
+            transaction.replace(R.id.mainFrameLayout, emerlistFragment)
             transaction.commit()
         }
 
