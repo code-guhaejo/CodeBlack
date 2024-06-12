@@ -274,6 +274,8 @@ class CounselingFragment : Fragment() {
         }
         // 오류 메시지 출력
 
+
     }
+
 
 }
