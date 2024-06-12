@@ -1,8 +1,8 @@
 package com.guhaejo.codeblack.repository
 
 import android.util.Log
-import com.guhaejo.codeblack.data.remote.logingoogle.ClientInformation
-import com.guhaejo.codeblack.data.remote.logingoogle.api.LoginGoogleService
+import com.guhaejo.codeblack.data.remote.ClientInformation
+import com.guhaejo.codeblack.data.remote.logingoogle.api.LoginGoogleApi
 import com.guhaejo.codeblack.data.remote.logingoogle.model.LoginGoogleRequestModel
 import com.guhaejo.codeblack.data.remote.logingoogle.model.LoginGoogleResponseModel
 import com.guhaejo.codeblack.data.remote.logingoogle.model.SendAccessTokenModel
@@ -19,7 +19,7 @@ class LoginRepository {
 
     // 구글 OAuth 서버로부터 액세스 토큰 요청
     fun getAccessToken(authCode:String) {
-        LoginGoogleService.loginRetrofit(getAccessTokenBaseUrl).getAccessToken(
+        LoginGoogleApi.loginRetrofit(getAccessTokenBaseUrl).getAccessToken(
             request = LoginGoogleRequestModel(
                 grant_type = "authorization_code",
                 client_id = ClientInformation.CLIENT_ID,
@@ -45,7 +45,7 @@ class LoginRepository {
     //  액세스 토큰을 로컬 서버로 전송
     fun sendAccessToken(accessToken:String){
         Log.d(TAG, "Sending access token to server: $accessToken")
-        LoginGoogleService.loginRetrofit(sendAccessTokenBaseUrl).sendAccessToken(
+        LoginGoogleApi.loginRetrofit(sendAccessTokenBaseUrl).sendAccessToken(
             accessToken = SendAccessTokenModel(accessToken)
         ).enqueue(object :Callback<String>{
             override fun onResponse(call: Call<String>, response: Response<String>) {
