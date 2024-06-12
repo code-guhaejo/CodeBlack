@@ -46,7 +46,7 @@ class SignUpActivity : AppCompatActivity() {
 
             lifecycleScope.launch {
                 try {
-                    val response = RetrofitClient.loginLocalService.signUpUser(signUpRequest)
+                    val response = RetrofitClient.loginLocalApi.signUpUser(signUpRequest)
                     if (response.isSuccessful) {
                         val signUpResponse: SignUpResponse? = response.body()
                         if (signUpResponse != null) {
