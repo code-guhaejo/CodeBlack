@@ -41,7 +41,7 @@ class CounselingFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var etMsg: EditText
     private lateinit var btnSend: AppCompatImageView
-    private lateinit var textnext: TextView
+    private lateinit var btnchat: TextView
 
     private val messageList = ArrayList<Message>()
     private lateinit var messageAdapter: MessageAdapter
@@ -101,7 +101,15 @@ class CounselingFragment : Fragment() {
         recyclerView = view.findViewById(R.id.chat_recyclerview)
         etMsg = view.findViewById(R.id.chat_input)
         btnSend = view.findViewById(R.id.chat_send_btn)
-        textnext=view.findViewById(R.id.textView10)
+        btnchat=view.findViewById(R.id.chat_button)
+
+        btnchat.setOnClickListener{
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            val hospitalFragment = HospitalFragment.newInstance("", "")
+//            transaction.addToBackStack(null)
+            transaction.replace(R.id.mainFrameLayout, hospitalFragment)
+            transaction.commit()
+        }
         // RecyclerView 설정
         recyclerView.setHasFixedSize(true)
         val manager = LinearLayoutManager(context)
