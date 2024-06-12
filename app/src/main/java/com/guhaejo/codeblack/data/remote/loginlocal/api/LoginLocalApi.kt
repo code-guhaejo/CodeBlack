@@ -9,7 +9,7 @@ import retrofit2.http.Body
 import retrofit2.http.Headers
 import retrofit2.http.POST
 
-interface LoginLocalService {
+interface LoginLocalApi {
     @Headers("Content-Type: application/json")
     @POST("signin")
     suspend fun signInUser(@Body signInRequest: SignInRequest): Response<SignInResponse>

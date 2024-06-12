@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -5,6 +7,11 @@ plugins {
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+}
+
+// local.properties 내부에서 key값을 가져오는 함수
+fun getApiKey(propertyKey: String): String {
+    return gradleLocalProperties(rootDir).getProperty(propertyKey)
 }
 
 android {
@@ -19,6 +26,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "API_KEY", getApiKey("GOOGLE_MAPS_API_KEY"))
     }
 
     buildTypes {
@@ -40,6 +49,8 @@ android {
     }
 
     buildFeatures {
+        buildConfig = true
+
         viewBinding = true
         dataBinding = true
     }
@@ -49,9 +60,11 @@ dependencies {
 
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.activity:activity-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.fragment:fragment-ktx:1.7.1")
+    implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("com.google.android.libraries.places:places:3.5.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -59,8 +72,8 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.51.1")
     kapt("com.google.dagger:hilt-android-compiler:2.51.1")
 
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.0")
-    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.8.0")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.1")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.8.1")
 
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
@@ -73,10 +86,11 @@ dependencies {
     implementation ("com.squareup.okhttp3:okhttp-urlconnection:4.9.1")
 
     implementation ("com.google.code.gson:gson:2.10")
-    implementation ("com.google.android.gms:play-services-auth:21.1.1")
-    implementation("com.google.android.gms:play-services-location-license:12.0.1")
-    implementation("com.google.android.gms:play-services-maps:18.2.0")
-
+    implementation ("com.google.android.gms:play-services-auth:21.2.0")
+    implementation ("com.google.android.gms:play-services-location-license:12.0.1")
+    implementation ("com.google.android.gms:play-services-maps:18.2.0")
+    implementation ("com.google.android.gms:play-services-location:21.3.0")
+    implementation ("com.google.android.libraries.places:places:3.5.0")
 }
 
 // Allow references to generated code
