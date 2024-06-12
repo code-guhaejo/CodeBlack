@@ -25,7 +25,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
-
 class LoginActivity : AppCompatActivity() {
     private lateinit var loginGoogle: LoginGoogle
     private lateinit var googleSignInLauncher: ActivityResultLauncher<Intent>
@@ -50,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
 
             lifecycleScope.launch {
                 try {
-                    val response = RetrofitClient.loginLocalService.signInUser(signInRequest)
+                    val response = RetrofitClient.loginLocalApi.signInUser(signInRequest)
                     if (response.isSuccessful) {
                         val signInResponse: SignInResponse? = response.body()
                         if (signInResponse != null) {
@@ -58,15 +57,19 @@ class LoginActivity : AppCompatActivity() {
                             val intent = Intent(this@LoginActivity, BottomNavActivity::class.java)
                             startActivity(intent)
                         } else {
-                            Toast.makeText(this@LoginActivity, "로그인 실패: ${response.message()}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@LoginActivity, "로그인 실패", Toast.LENGTH_SHORT).show()
+                            Log.d(TAG, "로그인 실패: ${response.message()}")
                         }
                     } else {
-                        Toast.makeText(this@LoginActivity, "로그인 실패: ${response.message()}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@LoginActivity, "로그인 실패", Toast.LENGTH_SHORT).show()
+                        Log.d(TAG, "로그인 실패: ${response.message()}")
                     }
                 } catch (e: HttpException) {
-                    Toast.makeText(this@LoginActivity, "로그인 실패: ${e.message()}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, "로그인 실패", Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "로그인 실패: ${e.message()}")
                 } catch (e: Exception) {
-                    Toast.makeText(this@LoginActivity, "로그인 실패: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, "로그인 실패", Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "로그인 실패: ${e.message}")
                 }
             }
         }
@@ -75,7 +78,6 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
-
 
         // Google 로그인
         initGoogleSignIn()
@@ -121,7 +123,7 @@ class LoginActivity : AppCompatActivity() {
 
                 if (account != null) {
                     // 로그인 성공 시 처리
-                    Toast.makeText(this@LoginActivity, "로그인 성공: ${account.displayName}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "로그인 성공: ${account.displayName}")
 
                     // 액세스 토큰 요청
@@ -140,7 +142,7 @@ class LoginActivity : AppCompatActivity() {
             } catch (e: ApiException) {
                 // 로그인 실패 시 처리
                 Log.w(TAG, "로그인 실패: ${e.statusCode}")
-                Toast.makeText(this@LoginActivity, "로그인 실패: ${e.statusCode}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LoginActivity, "로그인 실패", Toast.LENGTH_SHORT).show()
             }
         }
     }

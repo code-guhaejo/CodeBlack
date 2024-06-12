@@ -10,7 +10,6 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 
 class MapsFragment : Fragment(), OnMapReadyCallback {
 
@@ -30,9 +29,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
-        val point = LatLng(37.514655, 126.979974)
+        val point = LatLng(37.514655, 126.979974) // 예시 좌표
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(point, 12f))
     }
-
-
 }
