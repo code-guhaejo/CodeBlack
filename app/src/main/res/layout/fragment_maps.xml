@@ -35,10 +35,9 @@
         android:text="병원 상세 정보" />
 
     <Button
-        android:id="@+id/findId"
+        android:id="@+id/call"
         android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="25dp"
+        android:layout_height="45dp"
         android:layout_marginLeft="30dp"
         android:text="전화 예약하기 "
         android:textColor="#0B0B0B"
