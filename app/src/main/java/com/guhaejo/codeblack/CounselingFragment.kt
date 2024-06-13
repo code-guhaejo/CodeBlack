@@ -1,7 +1,6 @@
 package com.guhaejo.codeblack
 
 import android.util.Log
-import android.app.AlertDialog
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +11,6 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.guhaejo.codeblack.data.remote.logingoogle.ClientInformation.OPEN_AI_SECRET
 import com.guhaejo.codeblack.view.adapter.MessageAdapter
 import com.guhaejo.codeblack.widget.utils.Message
 import okhttp3.*
@@ -23,15 +21,13 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
 import java.util.concurrent.TimeUnit
-import android.content.Context
-import android.content.DialogInterface
-import android.content.Intent
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import com.guhaejo.codeblack.data.remote.ClientInformation.OPEN_AI_SECRET
 import com.guhaejo.codeblack.data.remote.loginlocal.RetrofitClient
-import com.guhaejo.codeblack.data.remote.loginlocal.model.ChatRequest
-import com.guhaejo.codeblack.data.remote.loginlocal.model.MessageRequest
+import com.guhaejo.codeblack.data.remote.chat.model.ChatRequest
+import com.guhaejo.codeblack.data.remote.chat.model.MessageRequest
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.util.ArrayList
