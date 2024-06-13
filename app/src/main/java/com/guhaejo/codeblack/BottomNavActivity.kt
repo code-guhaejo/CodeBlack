@@ -20,70 +20,38 @@ class BottomNavActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.homeBottomNav.itemIconTintList = null
-        setFragment(TAG_HOME, HomeFragment())
+        setFragment(TAG_HOME, HomeFragment(), true) // 초기 로드는 항상 replace로 설정
 
         binding.homeBottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.ic_home -> setFragment(TAG_HOME, HomeFragment())
+                R.id.ic_home -> setFragment(TAG_HOME, HomeFragment(), true) // 홈 버튼 클릭 시 항상 replace
                 R.id.ic_mypage -> setFragment(TAG_MYPAGE, MypageFragment())
                 R.id.ic_hospital -> setFragment(TAG_HOSPITAL, HospitalFragment())
-                R.id.ic_counseling -> setFragment(TAG_COUNSELINGLIST, CounselinglistFragment())
+                R.id.ic_counseling -> setFragment(TAG_COUNSELINGLIST, CounselingFragment())
             }
-                true
-            }
+            true
         }
+    }
 
-    fun setFragment(tag: String, fragment: Fragment) {
+    fun setFragment(tag: String, fragment: Fragment, forceReplace: Boolean = false) {
         val manager: FragmentManager = supportFragmentManager
         val fragTransaction = manager.beginTransaction()
 
-        if (manager.findFragmentByTag(tag) == null){
-            fragTransaction.add(R.id.mainFrameLayout, fragment, tag)
-        }
+        val currentFragment = manager.findFragmentByTag(tag)
 
-        val home = manager.findFragmentByTag(TAG_HOME)
-        val mypage = manager.findFragmentByTag(TAG_MYPAGE)
-        val counselinglist = manager.findFragmentByTag(TAG_COUNSELINGLIST)
-        val hospital = manager.findFragmentByTag(TAG_HOSPITAL)
-
-
-        if (home != null) {
-            fragTransaction.hide(home)
-        }
-
-        if (counselinglist != null) {
-            fragTransaction.hide(counselinglist)
-        }
-
-        if (hospital != null) {
-            fragTransaction.hide(hospital)
-        }
-
-        if (mypage != null) {
-            fragTransaction.hide(mypage)
-        }
-
-        if (tag == TAG_HOME) {
-            if (home != null) {
-                fragTransaction.show(home)
-            }
-        }
-        else if (tag == TAG_MYPAGE) {
-            if (mypage != null) {
-                fragTransaction.show(mypage)
-            }
-        }
-        else if (tag == TAG_HOSPITAL) {
-            if (hospital != null) {
-                fragTransaction.show(hospital)
-            }
-        }
-        else if (tag == TAG_COUNSELINGLIST) {
-            if (counselinglist != null) {
-                fragTransaction.show(counselinglist)
+        if (currentFragment == null || forceReplace) {
+            fragTransaction.replace(R.id.mainFrameLayout, fragment, tag)
+        } else {
+            manager.fragments.forEach {
+                if (it == currentFragment) {
+                    fragTransaction.show(it)
+                } else {
+                    fragTransaction.hide(it)
+                }
             }
         }
 
+        fragTransaction.addToBackStack(null)
         fragTransaction.commitAllowingStateLoss()
     }
 }

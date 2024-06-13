@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CounselinglistFragment"
+    tools:context=".EmerlistFragment"
     android:background="@color/white">
 
     <LinearLayout
@@ -23,24 +23,15 @@
             android:elevation="16dp"
             android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/input_search"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:layout_weight="1"
-                android:background="#EFEFEF"
-                android:gravity="center_vertical"
-                android:lines="1"
-                android:textSize="14sp"
-                android:padding="10dp"
-                android:textStyle="bold" />
+                android:gravity="center"
+                android:text="응급실 리스트"
+                android:textSize="30sp" />
 
-            <ImageView
-                android:id="@+id/search"
-                android:layout_width="41dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:src="@drawable/search" />
 
         </LinearLayout>
 
