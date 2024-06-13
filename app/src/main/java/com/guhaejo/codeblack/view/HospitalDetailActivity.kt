@@ -1,15 +1,11 @@
 package com.guhaejo.codeblack.view
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -73,12 +69,7 @@ class HospitalDetailActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun makePhoneCall() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
-            val callIntent = Intent(Intent.ACTION_CALL)
-            callIntent.data = Uri.parse("tel:$phoneNumber")
-            startActivity(callIntent)
-        } else {
-            Toast.makeText(this, "전화 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
-        }
+        val callIntent = Intent(Intent.ACTION_VIEW, Uri.parse("tel:$phoneNumber"))
+        startActivity(callIntent)
     }
 }
