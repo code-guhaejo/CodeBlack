@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment
 class EmerlistFragment : Fragment() {
 
 
-    private var category: String? = null
+    private var category: String?=null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,10 +46,10 @@ class EmerlistFragment : Fragment() {
             val dummyData = listOf(
                 "충북대학교병원 응급의료센터",
                 "하나병원",
-                "충청북도 청주의료원",
+                //"충청북도 청주의료원",
                 "마이크로병원",
                 "청주현대병원",
-                "청주 소아청소년병원",
+                //"청주 소아청소년병원",
                 "한국병원",
                 "효성병원"
             )
