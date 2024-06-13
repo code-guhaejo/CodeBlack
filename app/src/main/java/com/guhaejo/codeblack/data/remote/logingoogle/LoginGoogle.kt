@@ -9,6 +9,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
@@ -28,7 +29,7 @@ class LoginGoogle(private val context: Context, private val lifecycleOwner: Life
         .requestEmail()
         .build()
 
-    private val googleSignInClient = GoogleSignIn.getClient(context, gso) // 클라이언트 생성
+    private val googleSignInClient: GoogleSignInClient = GoogleSignIn.getClient(context, gso) // 클라이언트 생성
 
     // 로그인 결과 처리
     fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
