@@ -183,4 +183,11 @@ class HospitalFragment : Fragment() {
         val phoneNumber: String,
         val latLng: LatLng
     )
+
+    companion object {
+        fun newInstance(s: String, s1: String): Fragment {
+            return HospitalFragment()
+
+        }
+    }
 }

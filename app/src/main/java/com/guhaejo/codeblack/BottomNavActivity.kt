@@ -27,7 +27,7 @@ class BottomNavActivity : AppCompatActivity() {
                 R.id.ic_home -> setFragment(TAG_HOME, HomeFragment(), true) // 홈 버튼 클릭 시 항상 replace
                 R.id.ic_mypage -> setFragment(TAG_MYPAGE, MypageFragment())
                 R.id.ic_hospital -> setFragment(TAG_HOSPITAL, HospitalFragment())
-                R.id.ic_counseling -> setFragment(TAG_COUNSELINGLIST, CounselinglistFragment())
+                R.id.ic_counseling -> setFragment(TAG_COUNSELINGLIST, CounselingFragment())
             }
             true
         }
