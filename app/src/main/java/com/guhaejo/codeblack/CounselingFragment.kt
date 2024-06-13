@@ -97,13 +97,6 @@ class CounselingFragment : Fragment() {
 
         btnchat.visibility = View.GONE
 
-        btnchat.setOnClickListener {
-            val transaction = requireActivity().supportFragmentManager.beginTransaction()
-            val emerlistFragment = EmerlistFragment.newInstance("확인","1")
-            transaction.replace(R.id.mainFrameLayout, emerlistFragment)
-            transaction.commit()
-        }
-
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(context).apply {
             stackFromEnd = true
@@ -209,7 +202,6 @@ class CounselingFragment : Fragment() {
             override fun onFailure(call: Call, e: IOException) {
                 addResponse("응답을 불러오지 못했습니다: " + e.message)
             }
-
             override fun onResponse(call: Call, response: Response) {
                 if (response.isSuccessful) {
                     try {
@@ -224,8 +216,15 @@ class CounselingFragment : Fragment() {
                         val category = resultJson.optString("category")
 
                         contex = message
+
                         activity?.runOnUiThread {
                             btnchat.visibility = if (category == "null") View.GONE else View.VISIBLE
+                            btnchat.setOnClickListener {
+                                val transaction = requireActivity().supportFragmentManager.beginTransaction()
+                                val emerlistFragment = EmerlistFragment.newInstance(category,"")
+                                transaction.replace(R.id.mainFrameLayout, emerlistFragment)
+                                transaction.commit()
+                            }
                         }
 
                         addResponse(message.trim())
@@ -240,6 +239,7 @@ class CounselingFragment : Fragment() {
                     addResponse("응답을 불러오지 못했습니다: " + response.body?.string())
                 }
             }
+
         })
     }
 
