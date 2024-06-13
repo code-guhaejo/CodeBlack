@@ -6,13 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.ListView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 
 class EmerlistFragment : Fragment() {
 
 
-    private var category: String? = null
+    private var category: String?=null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,8 +27,17 @@ class EmerlistFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         // ListView의 ID가 counseling_list_view인지 확인
+        var textView:TextView=view.findViewById(R.id.textView10)
+        textView.setText("[${category}] 응급실 리스트")
+
+        val counselingBtn: LinearLayout = view.findViewById(R.id.counseling_btn)
+        counselingBtn.setOnClickListener {
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.mainFrameLayout, CounselingFragment())
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
         val listView: ListView? = view.findViewById(R.id.counseling_list_view)
         if (listView == null) {
             Log.e("EmerlistFragment", "ListView is null, check the layout file.")
@@ -34,10 +46,10 @@ class EmerlistFragment : Fragment() {
             val dummyData = listOf(
                 "충북대학교병원 응급의료센터",
                 "하나병원",
-                "충청북도 청주의료원",
+                //"충청북도 청주의료원",
                 "마이크로병원",
                 "청주현대병원",
-                "청주 소아청소년병원",
+                //"청주 소아청소년병원",
                 "한국병원",
                 "효성병원"
             )
@@ -52,6 +64,7 @@ class EmerlistFragment : Fragment() {
             // ListView에 어댑터 설정
             listView.adapter = adapter
         }
+
     }
 
     companion object {
