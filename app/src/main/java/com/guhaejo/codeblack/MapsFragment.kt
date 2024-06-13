@@ -29,7 +29,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
-        val point = LatLng(37.514655, 126.979974) // 예시 좌표
+        val point = LatLng(36.62558280520578, 127.45443933457832) // 위도 경도
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(point, 12f))
     }
 }
