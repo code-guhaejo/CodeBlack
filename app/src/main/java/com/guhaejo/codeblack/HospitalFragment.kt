@@ -116,7 +116,6 @@ class HospitalFragment : Fragment() {
             Hospital("충청북도 청주의료원", "충북 청주시 상당구 용담동 68", "043-221-1114", LatLng(location.latitude, location.longitude)),
             Hospital("마이크로병원", "충북 청주시 흥덕구 복대동 2887", "043-276-8114", LatLng(location.latitude, location.longitude)),
             Hospital("청주현대병원", "충북 청주시 흥덕구 복대동 2888", "043-278-8114", LatLng(location.latitude, location.longitude)),
-            Hospital("청주 소아청소년병원", "충북 청주시 서원구 개신동 67", "043-279-8114", LatLng(location.latitude, location.longitude)),
             Hospital("한국병원", "충북 청주시 상당구 남일면 123", "043-280-8114", LatLng(location.latitude, location.longitude)),
             Hospital("효성병원", "충북 청주시 서원구 성화동 456", "043-290-8114", LatLng(location.latitude, location.longitude))
         )
