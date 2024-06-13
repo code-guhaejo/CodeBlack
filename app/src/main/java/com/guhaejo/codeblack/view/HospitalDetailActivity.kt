@@ -71,4 +71,14 @@ class HospitalDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         map.addMarker(MarkerOptions().position(hospitalLocation).title(intent.getStringExtra("HOSPITAL_NAME")))
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(hospitalLocation, 15f))
     }
+
+    private fun makePhoneCall() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+            val callIntent = Intent(Intent.ACTION_CALL)
+            callIntent.data = Uri.parse("tel:$phoneNumber")
+            startActivity(callIntent)
+        } else {
+            Toast.makeText(this, "전화 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
+        }
+    }
 }
