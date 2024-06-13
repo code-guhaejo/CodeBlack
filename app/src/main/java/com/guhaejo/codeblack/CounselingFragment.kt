@@ -180,7 +180,7 @@ class CounselingFragment : Fragment() {
                     "또 증상에 따라서 어떤장비가 있는곳으로 가야할지 알려줘" +
                     "\n 인공호흡기 일반\t 인공호흡기 조산아\t 인큐베이터\t CRRT\n" +
                     " ECMO\t 중심체온조절유도기\t 고압산소치료기\t CT\n" +
-                    " MRI\t 혈관촬영기\n 가야하는 응급실카테고리를 진단내용과 함께 간결하게 알려줘.")
+                    " MRI\t 혈관촬영기\n 가야하는 응급실카테고리를 진단내용과 함께 알려줘.")
 
             userMsg.put("role", "user")
             userMsg.put("content", question)
