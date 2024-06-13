@@ -23,15 +23,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
 import java.util.concurrent.TimeUnit
-
 import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
-import com.guhaejo.codeblack.data.remote.loginlocal.RetrofitClient
-import com.guhaejo.codeblack.data.remote.chat.model.ChatRequest
-import com.guhaejo.codeblack.data.remote.chat.model.MessageRequest
-import kotlinx.coroutines.launch
-import retrofit2.HttpException
-import java.util.Locale.Category
 
 class CounselingFragment : Fragment() {
 
@@ -53,26 +45,6 @@ class CounselingFragment : Fragment() {
         .readTimeout(60, TimeUnit.SECONDS)
         .build()
 
-    private fun startNewChat() {
-        lifecycleScope.launch {
-            try {
-                val response = RetrofitClient.chatService.addChat(ChatRequest(userId = 1))
-                if (response.isSuccessful) {
-                    chatId = response.body() ?: -1
-                    if (chatId == -1) {
-                        showError("채팅 ID를 생성할 수 없습니다.")
-                    }
-                } else {
-                    showError("채팅 시작")
-                }
-            } catch (e: HttpException) {
-                showError("서버 통신 실패: ${e.message()}")
-            } catch (e: Exception) {
-                showError("오류 발생: ${e.message}")
-            }
-        }
-    }
-
     private fun showError(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
         Log.e("CounselingFragment", message)
@@ -90,20 +62,12 @@ class CounselingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         recyclerView = view.findViewById(R.id.chat_recyclerview)
         etMsg = view.findViewById(R.id.chat_input)
         btnSend = view.findViewById(R.id.chat_send_btn)
         btnchat = view.findViewById(R.id.chat_button)
 
         btnchat.visibility = View.GONE
-
-        btnchat.setOnClickListener {
-            val transaction = requireActivity().supportFragmentManager.beginTransaction()
-            val emerlistFragment = EmerlistFragment.newInstance("확인","1")
-            transaction.replace(R.id.mainFrameLayout, emerlistFragment)
-            transaction.commit()
-        }
 
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(context).apply {
@@ -121,7 +85,6 @@ class CounselingFragment : Fragment() {
                 callAPI(question)
             }
         }
-        startNewChat()
     }
 
     private fun addToChat(sentBy: Message.Sender, message: String) {
@@ -132,23 +95,6 @@ class CounselingFragment : Fragment() {
         }
     }
 
-    private fun saveMessageToDatabase(chatId: Int, userId: Long, sender: Message.Sender, message: String) {
-        val messageRequest = MessageRequest(chatId, userId, sender, message)
-        lifecycleScope.launch {
-            try {
-                val response = RetrofitClient.chatService.addMessage(messageRequest)
-                if (response.isSuccessful) {
-                    Log.d("CounselingFragment", "Message saved successfully")
-                } else {
-                    showError("메시지 저장 실패: ${response.message()}")
-                }
-            } catch (e: HttpException) {
-                showError("서버 통신 실패: ${e.message()}")
-            } catch (e: Exception) {
-                showError("오류 발생: ${e.message}")
-            }
-        }
-    }
 
     private fun addResponse(response: String) {
         messageList.removeAt(messageList.size - 1)
@@ -163,6 +109,7 @@ class CounselingFragment : Fragment() {
         val arr = JSONArray()
         val baseAi = JSONObject()
         val userMsg = JSONObject()
+
         try {
             baseAi.put("role", "user")
             baseAi.put("content", "당신은 사용자의 증상을 가볍게 진단후, 그에 맞는 응급실 매칭 시스템을 위한 챗봇입니다. 사용자에게 응답을 제공할 때 다음과 같은 JSON 형식으로 응답을 제공합니다:\n" +
@@ -210,7 +157,6 @@ class CounselingFragment : Fragment() {
             override fun onFailure(call: Call, e: IOException) {
                 addResponse("응답을 불러오지 못했습니다: " + e.message)
             }
-
             override fun onResponse(call: Call, response: Response) {
                 if (response.isSuccessful) {
                     try {
@@ -225,8 +171,16 @@ class CounselingFragment : Fragment() {
                         val category = resultJson.optString("category")
 
                         contex = message
+
                         activity?.runOnUiThread {
                             btnchat.visibility = if (category == "null") View.GONE else View.VISIBLE
+                            btnchat.setOnClickListener {
+                                val transaction = requireActivity().supportFragmentManager.beginTransaction()
+                                val emerlistFragment = EmerlistFragment.newInstance(category,"")
+                                transaction.replace(R.id.mainFrameLayout, emerlistFragment)
+                                transaction.addToBackStack(null) // 이 줄을 추가하여 트랜잭션을 백스택에 추가
+                                transaction.commit()
+                            }
                         }
 
                         addResponse(message.trim())
@@ -241,6 +195,7 @@ class CounselingFragment : Fragment() {
                     addResponse("응답을 불러오지 못했습니다: " + response.body?.string())
                 }
             }
+
         })
     }
 
