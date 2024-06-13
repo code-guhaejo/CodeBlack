@@ -62,7 +62,7 @@ class CounselingFragment : Fragment() {
                         showError("채팅 ID를 생성할 수 없습니다.")
                     }
                 } else {
-                    showError("채팅 시작 오류: ${response.message()}")
+                    showError("채팅 시작")
                 }
             } catch (e: HttpException) {
                 showError("서버 통신 실패: ${e.message()}")
