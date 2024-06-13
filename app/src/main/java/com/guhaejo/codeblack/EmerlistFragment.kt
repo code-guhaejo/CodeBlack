@@ -28,17 +28,18 @@ class EmerlistFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // ListView의 ID가 counseling_list_view인지 확인
-        var textView:TextView=view.findViewById(R.id.textView10)
-        textView.setText("[${category}] 응급실 리스트")
 
-        val counselingBtn: LinearLayout = view.findViewById(R.id.counseling_btn)
+
+      /*  val counselingBtn: LinearLayout = view.findViewById(R.id.counseling_btn)
         counselingBtn.setOnClickListener {
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
             transaction.replace(R.id.mainFrameLayout, CounselingFragment())
             transaction.addToBackStack(null)
             transaction.commit()
         }
-        val listView: ListView? = view.findViewById(R.id.counseling_list_view)
+        */
+        /*val listView: ListView? = view.findViewById(R.id.counseling_list_view)
+
         if (listView == null) {
             Log.e("EmerlistFragment", "ListView is null, check the layout file.")
         } else {
@@ -63,7 +64,7 @@ class EmerlistFragment : Fragment() {
 
             // ListView에 어댑터 설정
             listView.adapter = adapter
-        }
+        }*/
 
     }
 
