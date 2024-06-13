@@ -1,4 +1,4 @@
-package com.guhaejo.codeblack.data.remote.loginlocal.model
+package com.guhaejo.codeblack.data.remote.chat.model
 
 data class ChatRequest(
     val userId: Long,
