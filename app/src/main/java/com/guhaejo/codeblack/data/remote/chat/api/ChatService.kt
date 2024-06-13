@@ -1,8 +1,7 @@
-package com.guhaejo.codeblack.data.remote.loginlocal.api
+package com.guhaejo.codeblack.data.remote.chat.api
 
-import com.guhaejo.codeblack.data.remote.loginlocal.model.ChatRequest
-import com.guhaejo.codeblack.data.remote.loginlocal.model.MessageRequest
-import com.guhaejo.codeblack.data.remote.loginlocal.model.MessageResponse
+import com.guhaejo.codeblack.data.remote.chat.model.ChatRequest
+import com.guhaejo.codeblack.data.remote.chat.model.MessageRequest
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST

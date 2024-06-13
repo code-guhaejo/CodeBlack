@@ -1,4 +1,4 @@
-package com.guhaejo.codeblack.data.remote.loginlocal.model
+package com.guhaejo.codeblack.data.remote.chat.model
 
 import com.guhaejo.codeblack.widget.utils.Message
 

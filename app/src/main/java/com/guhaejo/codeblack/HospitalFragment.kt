@@ -23,6 +23,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken
 import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.model.RectangularBounds
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 import com.google.android.libraries.places.api.net.FetchPlaceRequest
@@ -35,6 +36,8 @@ class HospitalFragment : Fragment() {
     private lateinit var locationApi: LocationApi
     private lateinit var locationPermissionRequest: ActivityResultLauncher<Array<String>>
     private lateinit var placesClient: PlacesClient
+
+    private var currentLocation: Location? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -88,7 +91,9 @@ class HospitalFragment : Fragment() {
 
         searchButton.setOnClickListener {
             val query = searchInput.text.toString()
-            searchHospitals(query)
+            currentLocation?.let {
+                searchHospitals(query, it)
+            } ?: Toast.makeText(requireContext(), "현재 위치를 사용할 수 없습니다.", Toast.LENGTH_SHORT).show()
         }
 
         hospitalArrowLeft.setOnClickListener {
@@ -102,6 +107,7 @@ class HospitalFragment : Fragment() {
     private fun getCurrentLocationAndUpdateHospitals() {
         locationApi.getCurrentLocation { location ->
             if (location != null) {
+                currentLocation = location
                 updateHospitalList(location)
             } else {
                 Toast.makeText(requireContext(), "현재 위치를 받아올 수 없습니다.", Toast.LENGTH_SHORT).show()
@@ -116,7 +122,6 @@ class HospitalFragment : Fragment() {
             Hospital("충청북도 청주의료원", "충북 청주시 상당구 용담동 68", "043-221-1114", LatLng(location.latitude, location.longitude)),
             Hospital("마이크로병원", "충북 청주시 흥덕구 복대동 2887", "043-276-8114", LatLng(location.latitude, location.longitude)),
             Hospital("청주현대병원", "충북 청주시 흥덕구 복대동 2888", "043-278-8114", LatLng(location.latitude, location.longitude)),
-            Hospital("청주 소아청소년병원", "충북 청주시 서원구 개신동 67", "043-279-8114", LatLng(location.latitude, location.longitude)),
             Hospital("한국병원", "충북 청주시 상당구 남일면 123", "043-280-8114", LatLng(location.latitude, location.longitude)),
             Hospital("효성병원", "충북 청주시 서원구 성화동 456", "043-290-8114", LatLng(location.latitude, location.longitude))
         )
@@ -126,14 +131,25 @@ class HospitalFragment : Fragment() {
 
         listView.setOnItemClickListener { _, _, position, _ ->
             val selectedHospital = hospitals[position]
-            searchHospitals(selectedHospital.name)
+            currentLocation?.let {
+                searchHospitals(selectedHospital.name, it)
+            }
         }
     }
 
-    private fun searchHospitals(query: String) {
+    private fun searchHospitals(query: String, location: Location) {
+        // 10km 반경을 설정하는 RectangularBounds 계산
+        val latitude = location.latitude
+        val longitude = location.longitude
+        val bounds = RectangularBounds.newInstance(
+            LatLng(latitude - 0.1, longitude - 0.1),
+            LatLng(latitude + 0.1, longitude + 0.1)
+        )
+
         val request = FindAutocompletePredictionsRequest.builder()
             .setQuery(query)
-            .setCountries("KR") // 국적 제한 추가
+            .setCountries("KR")
+            .setLocationBias(bounds)
             .setSessionToken(AutocompleteSessionToken.newInstance())
             .build()
 
@@ -160,7 +176,14 @@ class HospitalFragment : Fragment() {
     }
 
     private fun fetchPlaceDetails(hospital: Hospital) {
-        val placeFields = listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG, Place.Field.ADDRESS, Place.Field.PHONE_NUMBER)
+        val placeFields = listOf(
+            Place.Field.ID,
+            Place.Field.NAME,
+            Place.Field.LAT_LNG,
+            Place.Field.ADDRESS,
+            Place.Field.PHONE_NUMBER,
+            Place.Field.OPENING_HOURS
+        )
         val request = FetchPlaceRequest.builder(hospital.phoneNumber, placeFields).build()
 
         placesClient.fetchPlace(request).addOnSuccessListener { response ->
@@ -171,6 +194,10 @@ class HospitalFragment : Fragment() {
             intent.putExtra("LONGITUDE", place.latLng?.longitude ?: 0.0)
             intent.putExtra("ADDRESS", place.address)
             intent.putExtra("PHONE_NUMBER", place.phoneNumber)
+            val openingHours = place.openingHours?.weekdayText?.joinToString("\n")
+            if (!openingHours.isNullOrEmpty()) {
+                intent.putExtra("OPENING_HOURS", openingHours)
+            }
             startActivity(intent)
         }.addOnFailureListener { exception ->
             Toast.makeText(requireContext(), "병원 정보 불러오기 실패: ${exception.message}", Toast.LENGTH_SHORT).show()

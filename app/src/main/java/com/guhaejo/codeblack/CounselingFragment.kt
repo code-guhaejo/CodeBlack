@@ -23,11 +23,12 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
 import java.util.concurrent.TimeUnit
+
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.guhaejo.codeblack.data.remote.loginlocal.RetrofitClient
-import com.guhaejo.codeblack.data.remote.loginlocal.model.ChatRequest
-import com.guhaejo.codeblack.data.remote.loginlocal.model.MessageRequest
+import com.guhaejo.codeblack.data.remote.chat.model.ChatRequest
+import com.guhaejo.codeblack.data.remote.chat.model.MessageRequest
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.util.Locale.Category
